@@ -1,5 +1,7 @@
 import tkinter
 
+# it is a class which will be mother of 2 windows: delete word and correct word
+
 class WritingWindow:
     def __init__(self, label: str, title: str, writing: str):
         self.__writing1 = label
