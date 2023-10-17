@@ -1,17 +1,19 @@
 import tkinter
 import psycopg2
 import words
+import writing_window
 
 class Menu:
-    def __init__(self, login, password):
+    def __init__(self, login, password, userId):
         self.__login = login
         self.__password = password
+        self.__userId = userId
 
-    # function which read data from Postgre database
+    # function which read data from Postgre database and makes words
     def __read_from_database(self):
         polaczenie = psycopg2.connect(host="localhost", database="vocabulary", user=self.__login, password=self.__password, port=5432)
         kursor = polaczenie.cursor()
-        sql = "select * from words"
+        sql = "select word_id, word, definition from words"
         kursor.execute(sql)
         kill_gui = 0
         for w in kursor:
@@ -26,7 +28,8 @@ class Menu:
         return
 
     def __delete_word(self):
-        return
+        oDW = writing_window.WritingWindow('Ktore slowo chcesz usunac?', 'DESTROYER', 'ACCEPT')
+        oDW.window()
 
     # it is a start point of application
     def __login(self):
