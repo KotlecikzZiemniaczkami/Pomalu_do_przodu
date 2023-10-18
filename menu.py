@@ -9,12 +9,12 @@ class Menu:
         self.__password = password
         self.__userId = userId
 
-    # function which read data from Postgre database and makes words
+    # function which read data from Postgre database and makes words (but only for logged user)
     def __read_from_database(self):
         polaczenie = psycopg2.connect(host="localhost", database="vocabulary", user=self.__login, password=self.__password, port=5432)
         kursor = polaczenie.cursor()
-        sql = "select word_id, word, definition from words"
-        kursor.execute(sql)
+        sql = "SELECT word_id, word, definition FROM words WHERE owner_id = %s"
+        kursor.execute(sql, str(self.__userId))
         kill_gui = 0
         for w in kursor:
             say = words.Words(w[0], w[1], w[2], kill_gui)
