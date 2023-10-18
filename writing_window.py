@@ -21,7 +21,7 @@ class WritingWindow:
     # is reading an id which was written by user
     def giveId(self):
         self.__id = int(self.__en.get())
-        print(self.__id)
+        self.__ww.destroy()
 
     # GUI
     def window(self):
@@ -38,3 +38,4 @@ class WritingWindow:
         label.grid(row=0)
         self.__en.grid(row=1)
         button.grid(row=2)
+        self.__ww.mainloop()
