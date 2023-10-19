@@ -1,10 +1,11 @@
 import tkinter
 import psycopg2
 
+
 # this is a class which will be mother of 2 windows: delete word and correct word
 
 class WritingWindow:
-    def __init__(self, label: str, title: str, writing: str, user: str):
+    def __init__(self, label: str, title: str, writing: str, user: str, command: str, login: str, password: str):
         self.__writing1 = label
         self.__writing2 = writing
         self.__title = title
@@ -12,10 +13,14 @@ class WritingWindow:
         self.__en = 0
         self.__id = 0
         self.__user = user
+        self.__command = command
+        self.__login = login
+        self.__password = password
 
-    #reads word and definition basing only on id and owner
-    #if owner is different connection will be lost
-    def reading_for_update(self):
+    # reads word and definition basing only on id and owner
+    # if owner is different connection will be lost
+    # if connection is ok, then it will execute a command
+    def command(self):
         return
 
     # is reading an id which was written by user
@@ -33,7 +38,8 @@ class WritingWindow:
         label = tkinter.Label(self.__ww, width=45, bg='red', fg='black', text=self.__writing1)
         self.__en = tkinter.Entry(self.__ww, width=50, bg='black', fg='red', borderwidth=10)
         self.__en.insert(0, "Id: ")
-        button = tkinter.Button(self.__ww, width=43, bg='red', fg='black', text=self.__writing2, borderwidth=7, command = self.giveId)
+        button = tkinter.Button(self.__ww, width=43, bg='red', fg='black', text=self.__writing2, borderwidth=7,
+                                command=self.giveId)
 
         label.grid(row=0)
         self.__en.grid(row=1)

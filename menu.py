@@ -28,7 +28,7 @@ class Menu:
         return
 
     def __delete_word(self):
-        oDW = writing_window.WritingWindow('Ktore slowo chcesz usunac?', 'DESTROYER', 'ACCEPT', self.__userId)
+        oDW = writing_window.WritingWindow('Ktore slowo chcesz usunac?', 'DESTROYER', 'ACCEPT', self.__userId, 'DELETE FROM words WHERE word_id = %s AND user_id = %s')
         oDW.window()
 
     # it is a start point of application
