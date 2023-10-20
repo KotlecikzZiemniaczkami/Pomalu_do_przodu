@@ -9,6 +9,7 @@ class Words:
         self.fc = 0
         self.en = 0
         self.__kill = kill
+        self.__correctance = 0
 
     # just setter
     def set_word(self, word, definition):
@@ -23,12 +24,16 @@ class Words:
     def get_definition(self):
         return self.__definition
 
+    def get_correctance(self):
+        return self.__correctance
+
     # it is for a check button from flashcard method. It checks if word given by user is correct
     def read(self):
         is_correct = "Your answer is incorrect. Next time try: " + self.__word
         answer = self.en.get()
         if answer == self.__word:
             is_correct = "Great!"
+            self.__correctance = 1
 
         label = tkinter.Label(self.fc, width=45, bg='red', fg='black', text=is_correct)
         label.grid(row=4, column=0, columnspan=2)

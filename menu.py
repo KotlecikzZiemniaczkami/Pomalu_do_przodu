@@ -10,16 +10,34 @@ class Menu:
         self.__userId = userId
 
     # function which read data from Postgre database and makes words (but only for logged user)
+    # and whole mechanism of flashcards
     def __read_from_database(self):
+        #read from database
         polaczenie = psycopg2.connect(host="localhost", database="vocabulary", user=self.__login, password=self.__password, port=5432)
         kursor = polaczenie.cursor()
         sql = "SELECT word_id, word, definition FROM words WHERE owner_id = %s"
         kursor.execute(sql, str(self.__userId))
+        rep_words = []
         kill_gui = 0
         for w in kursor:
             say = words.Words(w[0], w[1], w[2], kill_gui)
-            kill_gui = say.flashcard()
+            help_in_rep_word = [say, 1]
+            rep_words.append(help_in_rep_word)
         kursor.close()
+
+        # mechanism
+        counter = len(rep_words)
+        counter_in_while = 0
+        while counter != 0:
+            if rep_words[counter_in_while][1] != 0:
+                kill_gui = rep_words[counter_in_while][0].flashcard()
+                if rep_words[counter_in_while][0].get_correctance():
+                    rep_words[counter_in_while][1] -= 1
+                else:
+                    rep_words[counter_in_while][1] += 1
+                if rep_words[counter_in_while][1] == 0:
+                    counter -= 1
+            counter_in_while = (counter_in_while + 1) % len(rep_words)
 
     def __add_new_word(self):
         return
