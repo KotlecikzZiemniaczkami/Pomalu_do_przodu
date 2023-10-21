@@ -8,3 +8,4 @@ me.window()
 # wprowadzic zabezpieczenia zeby kazdy uzytkownik mogl pracowac tylko na swoich kartach,
 # poprawic kod sql w words zeby pobieral tylko fiszki aktualnego uzytkownika
 # oraz dokonczyc wszystkie gui
+# poprawic to ze wszystkie slowa sa powtarzane dopuki wszystkie nie beda dobrze
